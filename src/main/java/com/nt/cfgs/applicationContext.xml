@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+        
+<!--  			By Using xml. file 
+  
+<bean id="drds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/campusx" />
+        <property name="username" value="root" />
+        <property name="password" value="Shoiab@123" />
+        </bean>     
+         -->
+         <!--  by sung hikari cp -->
+<!--        
+        <bean id="hrDs" class="com.zaxxer.hikari.HikariDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/campusx" />
+    <property name="username" value="root" />
+    <property name="password" value="Shoiab@123" />
+    <property name="maximumPoolSize" value="10" />
+    <property name="minimumIdle" value="5" />
+    <property name="idleTimeout" value="30000" />
+</bean> 
+ --> 
+     <bean class="com.zaxxer.hikari.HikariDataSource">
+    <property name="driverClassName" value="${jdbc.driver}" />
+    <property name="jdbcUrl" value="${jdbc.url}" />
+    <property name="username" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
+</bean> 
+        <!--  enable  compoment  scaaning  of the stoero  type annotation Spring bean  -->
+        <context:component-scan base-package="com.nt"/> 
+        
+        
+        <context:property-placeholder location ="com/nt/commons/Info.properties"/>
+        
+        <!--  Alise name  for the  DAO class bean id -->
+        <alias name="${dao.id}" alias="db"/>
+        
+        <bean class="java.util.Date"/>
+        
+    </beans>
+    
